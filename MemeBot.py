@@ -5,7 +5,7 @@ from shutil import move
 from slackclient import SlackClient
 from json import dumps as jsondump
 from config import API_TOKEN, CHANNEL, MEMES_DIR, IMG_EXTS
-from util import waitForNextPost
+from util import waitForNextPost, debugPrint
 sc = SlackClient(API_TOKEN)
 
 
@@ -20,8 +20,8 @@ class MemeBot:
             self.images.extend(glob(MEMES_DIR + ext))
 
     def mv_image(self, img):
-        move(img, './posted_memes/'
-             + os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
+        move(img, './posted_memes/' +
+             os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
         self.images.remove(img)
 
     def getRandomImage(self):
@@ -36,8 +36,8 @@ class MemeBot:
         if response['ok']:
             self.mv_image(img)
         else:
-            self.debugPrint(jsondump(response, indent=4),
-                            "ERROR POSTING MEME 😭")
+            debugPrint(jsondump(response, indent=4),
+                       "ERROR POSTING MEME 😭")
 
     def sendMessage(self, msg):
         sc.api_call(
@@ -45,12 +45,6 @@ class MemeBot:
             channel=CHANNEL,
             text=msg
         )
-
-    def debugPrint(self, str, typeoferr):
-        print("\n👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀")
-        print(typeoferr)
-        print(str)
-        print("👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀\n")
 
 
 memebot = MemeBot()
