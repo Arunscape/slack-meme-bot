@@ -5,6 +5,7 @@ from shutil import move
 from slackclient import SlackClient
 from json import dumps as jsondump
 from config import API_TOKEN, CHANNEL, MEMES_DIR, IMG_EXTS
+from util import waitForNextPost
 sc = SlackClient(API_TOKEN)
 
 
@@ -19,8 +20,8 @@ class MemeBot:
             self.images.extend(glob(MEMES_DIR + ext))
 
     def mv_image(self, img):
-        move(img, './posted_memes/' +
-             os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
+        move(img, './posted_memes/'
+             + os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
         self.images.remove(img)
 
     def getRandomImage(self):
