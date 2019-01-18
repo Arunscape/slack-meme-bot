@@ -3,6 +3,7 @@ import random
 from glob import glob
 from shutil import move
 from slackclient import SlackClient
+from json import dumps as jsondump
 from config import *
 
 sc = SlackClient(API_TOKEN)
@@ -35,7 +36,12 @@ def sendMeme(img):
         channels=CHANNEL,
         file=open(img, 'rb')
     )
-    print(response)
+    if response['ok']:
+        mv_image(img)
+    else:
+        print("\n👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀")
+        print(jsondump(response, indent=4))
+        print("👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀\n")
 
 
 def sendMessage(msg):
