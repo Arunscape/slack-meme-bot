@@ -19,14 +19,33 @@ def getImages():
 
 def mv_image(img):
     global images
-    print(img)
-    print('./posted_memes/' +
-          os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
-    move(img, './posted_memes/' +
-         os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
+    move(img, './posted_memes/'
+         + os.path.normpath(img).replace(os.path.normpath(MEMES_DIR), ''))
     images.remove(img)
 
 
 def getRandomImage():
     global images
     return random.choice(images)
+
+
+def sendMeme(img):
+    response = sc.api_call(
+        'files.upload',
+        channels=CHANNEL,
+        file=open(img, 'rb')
+    )
+    print(response)
+
+
+def sendMessage(msg):
+    sc.api_call(
+        'chat.postMessage',
+        channel=CHANNEL,
+        text=msg
+    )
+
+
+getImages()
+sendMeme(getRandomImage())
+# sendMessage("👀")
