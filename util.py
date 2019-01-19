@@ -1,9 +1,5 @@
 import numpy as np
-import sys
 import time
-
-# I don't even know what a gamma distribution is but it generates
-# numbers in like, exactly the way I want "random" numbers
 
 
 def debugPrint(str, typeoferr):
@@ -11,6 +7,9 @@ def debugPrint(str, typeoferr):
     print(typeoferr)
     print(str)
     print("👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀\n")
+
+# I don't even know what a gamma distribution is but it generates
+# numbers in like, exactly the way I want "random" numbers
 
 
 def waitHowManySeconds():
@@ -30,5 +29,11 @@ def waitForNextPost():
     time.sleep(s)
 
 
+def critError(str="EXECUTE main.py NOT THIS FILE"):
+    print("\n⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔")
+    print(str)
+    print("⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔\n")
+
+
 if __name__ == "__main__":
-    waitForNextPost()
+    critError()

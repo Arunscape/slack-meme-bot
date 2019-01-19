@@ -5,7 +5,7 @@ from shutil import move
 from slackclient import SlackClient
 from json import dumps as jsondump
 from config import API_TOKEN, CHANNEL, MEMES_DIR, IMG_EXTS
-from util import debugPrint
+from util import debugPrint, critError
 sc = SlackClient(API_TOKEN)
 
 
@@ -33,15 +33,24 @@ class MemeBot:
             channels=CHANNEL,
             file=open(img, 'rb')
         )
-        if response['ok']:
-            self.mv_image(img)
-        else:
-            debugPrint(jsondump(response, indent=4),
-             "ERROR POSTING MEME 😭")
+        self.checkResponse(img, response)
 
     def sendMessage(self, msg):
-        sc.api_call(
+        response = sc.api_call(
             'chat.postMessage',
             channel=CHANNEL,
             text=msg
         )
+        self.checkResponse(None, response)
+
+    def checkResponse(self, img, response):
+
+        if response['ok'] and img is not None:
+            self.mv_image(img)
+        else:
+            debugPrint(jsondump(response, indent=4),
+                       "ERROR POSTING MEME 😭")
+
+
+if __name__ == "__main__":
+    critError()
