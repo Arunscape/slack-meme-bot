@@ -26,8 +26,8 @@ def waitForNextPost():
     print("NEXT MEME WILL BE POSTED AT {}".format(
         time.asctime(time.localtime(time.time() + s))))
     print("⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛⌛\n")
-
     time.sleep(s)
+    print("POSTING NEXT MEME 😍😍😍😍😍")
 
 
 def critError(str="EXECUTE main.py NOT THIS FILE"):

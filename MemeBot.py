@@ -28,7 +28,10 @@ class MemeBot:
     def getRandomImage(self):
         return random.choice(self.images)
 
-    def sendMeme(self, img):
+    def sendMeme(self, img=None):
+        if img is None:
+            img = self.getRandomImage()
+
         response = sc.api_call(
             'files.upload',
             channels=CHANNEL,
